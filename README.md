@@ -11,19 +11,11 @@ from google.colab import files
 import cv2
 import numpy as np
 
-# !pip install roboflow
-
-# from roboflow import Roboflow
-# rf = Roboflow(api_key="p9AE4cfyWZVtKr7MenmF")
-# project = rf.workspace("testingws").project("object-detection-bbaki")
-# version = project.version(3)
-# dataset = version.download("yolov8")
-
 !pip install roboflow
 
 from roboflow import Roboflow
 rf = Roboflow(api_key="p9AE4cfyWZVtKr7MenmF")
-project = rf.workspace("citradigital").project("hewandetection")
+project = rf.workspace("citradigital").project("database-deteksiplatnomer")
 version = project.version(1)
 dataset = version.download("yolov8")
 
@@ -39,7 +31,7 @@ from ultralytics import YOLO
 model = YOLO("yolov8n.pt")  # "yolov8n.pt" adalah versi YOLOv8 Nano
 
 # Jalankan pelatihan dengan dataset
-model.train(data="/content/HewanDetection-1/data.yaml", epochs=80, imgsz=640)
+model.train(data="/content/database-deteksiplatnomer-1/data.yaml", epochs=75, imgsz=640)
 
 from ultralytics import YOLO
 
@@ -48,7 +40,7 @@ model = YOLO("/content/runs/detect/train/weights/best.pt")
 
 dataset = version.download("yolov8")
 
-result = model.predict(source="/content/HewanDetection-1/valid/images", imgsz=640, save=True)
+result = model.predict(source="/content/database-deteksiplatnomer-1/valid/images", imgsz=640, save=True)
 
 # Menampilkan semua hasil prediksi
 import matplotlib.pyplot as plt
